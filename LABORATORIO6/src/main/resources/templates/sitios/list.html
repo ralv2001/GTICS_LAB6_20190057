@@ -9,7 +9,7 @@
   <body>
     <main>
       <div class="container px-4 py-5">
-        <h1 class="pb-2 border-bottom">Lista de transportistas</h1>
+        <h1 class="pb-2 border-bottom">Lista de Sitios</h1>
         <div class="d-flex mt-3 mb-4">
           <a class="btn btn-primary" th:href="@{'/shipper/new'}">Nuevo Transportista</a>
           <a class="btn btn-secondary ms-auto" th:href="@{'/'}">Regresar</a>
@@ -22,27 +22,25 @@
         </form>
         <table class="table">
           <tr>
-            <th>#</th>
-            <th>Nombre de la compañia</th>
-            <th>Teléfono</th>
+            <th>Locación</th>
+            <th>Fecha de Instalación</th>
+            <th>Latitud</th>
+            <th>Longitud</th>
             <th></th>
             <th></th>
           </tr>
-          <tr th:each="shipper, info : ${shipperList}">
-            <td th:text="${info.index + 1}"></td>
-            <td th:text="${shipper.companyname}"></td>
-            <td th:text="${shipper.phone}"></td>
-            <td><a class="btn btn-primary" th:href="@{'/shipper/edit' + '?id=' + ${shipper.shipperId}}">Editar</a>
+          <tr th:each="sitio : ${listaSitios}">
+            <td th:text="${sitio.getSiteName()}"></td>
+            <td th:text="${sitio.getLocation().getCountry()} + '-' + ${sitio.getLocation().getCity()}"></td>
+            <td th:text="${sitio.getLatitude()}"></td>
+            <td th:text="${sitio.getLongitude()}"></td>
+            <td><a class="btn btn-primary" th:href="@{'/sitios/edit' + '?id=' + ${sitio.getSiteID()}}">Editar</a>
             </td>
-            <td><a class="btn btn-danger" th:href="@{'/shipper/delete' + '?id=' + ${shipper.shipperId}}">Borrar</a>
+            <td><a class="btn btn-danger" th:href="@{'/sitios/delete' + '?id=' + ${sitio.getSiteID()}}">Borrar</a>
             </td>
           </tr>
         </table>
         <hr>
-        <div class="mt-3">
-          <h3>Ejemplo con fragmentos</h3>
-          <div th:replace="fragmentos/fragmento1 :: shippersTable('Shippers List',${shipperList})"></div>
-        </div>
       </div>
     </main>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>

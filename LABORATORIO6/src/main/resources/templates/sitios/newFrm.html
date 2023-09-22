@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <title>Nuevo Sitio</title>
+  </head>
+  <body>
+    <main>
+      <div class="container px-4 py-5">
+        <h1 class="pb-2 mb-3 border-bottom">Nuevo Producto</h1>
+        <form method="post" th:action="@{'/sitios/save'}" class="mt-2">
+          <div class="mb-3">
+            <label for="SiteName" class="form-label">Nombre del Sitio</label>
+            <input type="text" class="form-control" name="SiteName" id="SiteName">
+          </div>
+          <div class="mb-3">
+            <label for="location" class="form-label">Locacion</label>
+            <select name="location" class="form-select" id="location">
+              <option th:each="category : ${listaLocation}" th:text="${category.getCountry()} + '-' + ${category.getCity()}"
+                      th:value="${category.getLocationID()}"></option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="OpenedDate" class="form-label">Fecha de instalacion</label>
+            <input type="date" class="form-control" name="OpenedDate" id="OpenedDate">
+          </div>
+          <div class="mb-3">
+            <label for="Latitude" class="form-label">Latitud</label>
+            <input type="date" class="form-control" name="Latitude" id="Latitude">
+          </div>
+          <div class="mb-3">
+            <label for="Longitude" class="form-label">Longitud</label>
+            <input type="date" class="form-control" name="Longitude" id="Longitude">
+          </div>
+
+          <a th:href="@{'/product'}" class="btn btn-danger">Cancelar</a>
+          <button type="submit" class="btn btn-primary">Registrar</button>
+        </form>
+      </div>
+    </main>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+  </body>
+</html>
